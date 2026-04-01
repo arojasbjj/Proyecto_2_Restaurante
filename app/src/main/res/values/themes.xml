@@ -1,5 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="Theme.RestauranteApp" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.RestauranteApp"
+        parent="Theme.AppCompat.Light.NoActionBar">
+
+        <item name="colorPrimary">#6200EE</item>
+        <item name="colorPrimaryDark">#3700B3</item>
+        <item name="colorAccent">#03DAC5</item>
+
+    </style>
+
 </resources>

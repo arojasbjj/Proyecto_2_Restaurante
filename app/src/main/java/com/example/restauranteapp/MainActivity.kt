@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
+import android.content.Intent
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,6 +17,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        startActivity(Intent(this, RegistroActivity::class.java))
 
         setContentView(R.layout.activity_main)
 
@@ -28,20 +31,20 @@ class MainActivity : AppCompatActivity() {
 
     private fun obtenerPlatillos() {
 
-        val url = "https://10.0.2.2:7132/api/PlatillosApi"
+
+        val url = "http://10.0.2.2:5288/api/PlatillosApi"
 
         val queue = Volley.newRequestQueue(this)
 
         val request = StringRequest(
             Request.Method.GET,
             url,
-
             { response ->
                 txtResultado.text = response
             },
-
             { error ->
-                txtResultado.text = "Error: " + error.message
+                txtResultado.text =
+                    "Error API:\n${error.networkResponse?.statusCode}\n${error.message}"
             }
         )
 
