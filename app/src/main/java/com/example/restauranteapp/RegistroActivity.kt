@@ -9,6 +9,7 @@ import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import org.json.JSONObject
+import com.example.restauranteapp.database.UsuarioDAO
 
 class RegistroActivity : AppCompatActivity() {
 
@@ -33,28 +34,54 @@ class RegistroActivity : AppCompatActivity() {
 
     private fun registrarUsuario() {
 
+        val nombre = txtNombre.text.toString()
+        val correo = txtCorreo.text.toString()
+
+
+        if (nombre.isEmpty() || correo.isEmpty()) {
+            txtResultado.text = "Complete todos los campos"
+            return
+        }
+
         val url = "http://10.0.2.2:5288/api/AuthApi/register"
 
-        val json = JSONObject()
-        json.put("nombre", txtNombre.text.toString())
-        json.put("correo", txtCorreo.text.toString())
-        json.put("password", "12345")
-        json.put("captcha", "5")
+        val json = JSONObject().apply {
+            put("nombre", nombre)
+            put("correo", correo)
+            put("password", "12345")
+            put("captcha", "5")
+        }
 
-        val request = JsonObjectRequest(
+        val request = object : JsonObjectRequest(
             Request.Method.POST,
             url,
             json,
 
             { response ->
-                txtResultado.text = response.toString()
+
+
+                txtResultado.text = "Registro exitoso ✅"
+
+
+                val dao = UsuarioDAO(this)
+                dao.insertar(nombre, correo)
             },
 
             { error ->
-                txtResultado.text =
-                    "Error API: ${error.networkResponse?.statusCode}"
+
+                val status = error.networkResponse?.statusCode
+
+                txtResultado.text = "Error API: $status"
             }
-        )
+
+        ) {
+
+            override fun getHeaders(): MutableMap<String, String> {
+                val headers = HashMap<String, String>()
+                headers["Content-Type"] = "application/json"
+                return headers
+            }
+        }
 
         Volley.newRequestQueue(this).add(request)
     }
