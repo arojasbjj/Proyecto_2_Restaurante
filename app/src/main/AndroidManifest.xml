@@ -3,7 +3,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.restauranteapp">
 
-    <!-- PERMISO INTERNET -->
+
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
@@ -13,14 +13,8 @@
         android:label="@string/app_name"
         android:theme="@style/Theme.RestauranteApp">
 
-        <!-- Pantalla Registro -->
         <activity
-            android:name=".RegistroActivity"
-            android:exported="false"/>
-
-        <!-- Pantalla Principal -->
-        <activity
-            android:name=".MainActivity"
+            android:name=".LoginActivity"
             android:exported="true">
 
             <intent-filter>
@@ -29,6 +23,14 @@
             </intent-filter>
 
         </activity>
+
+        <activity
+            android:name=".RegistroActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
 
     </application>
 

@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "com.example.restauranteapp"
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.example.restauranteapp"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 
@@ -55,6 +55,7 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 
     implementation("com.android.volley:volley:1.2.1")
+    implementation(libs.androidx.activity)
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation(
