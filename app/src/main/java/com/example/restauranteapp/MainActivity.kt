@@ -2,52 +2,45 @@ package com.example.restauranteapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.TextView
-import android.content.Intent
-import com.android.volley.Request
-import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
-
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var txtResultado: TextView
-    lateinit var btnCargar: Button
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        startActivity(Intent(this, RegistroActivity::class.java))
-
         setContentView(R.layout.activity_main)
 
-        txtResultado = findViewById(R.id.txtResultado)
-        btnCargar = findViewById(R.id.btnCargar)
+        val bottomMenu = findViewById<BottomNavigationView>(R.id.bottomMenu)
 
-        btnCargar.setOnClickListener {
-            obtenerPlatillos()
-        }
-    }
+        // Fragment inicial
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.frameContainer, InicioFragment())
+            .commit()
 
-    private fun obtenerPlatillos() {
+        bottomMenu.setOnItemSelectedListener {
 
+            when(it.itemId){
 
-        val url = "http://10.0.2.2:5288/api/PlatillosApi"
+                R.id.menu_inicio -> {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.frameContainer, InicioFragment())
+                        .commit()
+                }
 
-        val queue = Volley.newRequestQueue(this)
+                R.id.menu_platillos -> {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.frameContainer, PlatillosFragment())
+                        .commit()
+                }
 
-        val request = StringRequest(
-            Request.Method.GET,
-            url,
-            { response ->
-                txtResultado.text = response
-            },
-            { error ->
-                txtResultado.text =
-                    "Error API:\n${error.networkResponse?.statusCode}\n${error.message}"
+                R.id.menu_perfil -> {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.frameContainer, PerfilFragment())
+                        .commit()
+                }
             }
-        )
 
-        queue.add(request)
+            true
+        }
     }
 }

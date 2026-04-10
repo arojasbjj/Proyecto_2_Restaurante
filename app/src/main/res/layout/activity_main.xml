@@ -2,23 +2,28 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:padding="16dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/btnCargar"
-        android:text="Cargar Platillos"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+    <!-- CONTENEDOR DE FRAGMENTS -->
 
-    <TextView
-        android:id="@+id/txtResultado"
-        android:text="Resultado API"
-        android:textSize="18sp"
-        android:paddingTop="20dp"
+    <FrameLayout
+        android:id="@+id/frameContainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <!-- MENU INFERIOR -->
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:itemIconTint="@color/black"
+        app:itemTextColor="@color/black"
+        android:background="@android:color/white"
+        app:menu="@menu/menu_bottom"/>
 
 </LinearLayout>

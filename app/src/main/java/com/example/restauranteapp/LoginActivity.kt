@@ -1,6 +1,7 @@
 package com.example.restauranteapp
 
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -18,9 +19,13 @@ class LoginActivity : AppCompatActivity() {
     lateinit var txtResultado: TextView
     lateinit var btnIngresar: Button
 
+    lateinit var preferencias: SharedPreferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        preferencias = getSharedPreferences("sesion", MODE_PRIVATE)
 
         txtCorreo = findViewById(R.id.txtCorreo)
         txtPassword = findViewById(R.id.txtPassword)
@@ -47,14 +52,19 @@ class LoginActivity : AppCompatActivity() {
 
             { response ->
 
+                // GUARDAR SESIÓN
+                val editor = preferencias.edit()
+                editor.putString("correo", txtCorreo.text.toString())
+                editor.putBoolean("logueado", true)
+                editor.apply()
+
                 txtResultado.text = "Acceso permitido"
 
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
+                startActivity(Intent(this, MainActivity::class.java))
                 finish()
             },
 
-            { error ->
+            {
                 txtResultado.text = "Credenciales inválidas"
             }
         )
