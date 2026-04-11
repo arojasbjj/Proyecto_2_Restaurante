@@ -38,37 +38,23 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun loginUsuario() {
+        val usuario = txtCorreo.text.toString()
+        val password = txtPassword.text.toString()
 
-        val url = "http://10.0.2.2:5288/api/AuthApi/login"
+        if (usuario == "admin" && password == "admin") {
+            // GUARDAR SESIÓN
+            val editor = preferencias.edit()
+            editor.putString("usuario", usuario)
+            editor.putBoolean("logueado", true)
+            editor.apply()
 
-        val json = JSONObject()
-        json.put("correo", txtCorreo.text.toString())
-        json.put("password", txtPassword.text.toString())
+            txtResultado.text = "Acceso permitido"
 
-        val request = JsonObjectRequest(
-            Request.Method.POST,
-            url,
-            json,
-
-            { response ->
-
-                // GUARDAR SESIÓN
-                val editor = preferencias.edit()
-                editor.putString("correo", txtCorreo.text.toString())
-                editor.putBoolean("logueado", true)
-                editor.apply()
-
-                txtResultado.text = "Acceso permitido"
-
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
-            },
-
-            {
-                txtResultado.text = "Credenciales inválidas"
-            }
-        )
-
-        Volley.newRequestQueue(this).add(request)
+            // Ir a la pantalla principal
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        } else {
+            txtResultado.text = "Credenciales inválidas (admin/admin)"
+        }
     }
 }

@@ -9,7 +9,8 @@
 
     <EditText
         android:id="@+id/txtCorreo"
-        android:hint="Correo"
+        android:hint="Usuario"
+        android:inputType="text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
