@@ -18,6 +18,8 @@ class RegistroActivity : AppCompatActivity() {
     lateinit var txtResultado: TextView
     lateinit var btnRegistrar: Button
 
+    lateinit var btnVolverLogin : Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registro)
@@ -29,6 +31,12 @@ class RegistroActivity : AppCompatActivity() {
 
         btnRegistrar.setOnClickListener {
             registrarUsuario()
+        }
+
+        btnVolverLogin = findViewById(R.id.btnVolverLogin)
+
+        btnVolverLogin.setOnClickListener {
+            finish()
         }
     }
 
@@ -59,12 +67,23 @@ class RegistroActivity : AppCompatActivity() {
 
             { response ->
 
+                if (correo == "admin" || correo == "admin@gmail.com") {
 
-                txtResultado.text = "Registro exitoso ✅"
+                    txtResultado.text = "Registro exitoso ✅"
 
+                    val dao = UsuarioDAO(this)
+                    dao.insertar(nombre, correo)
 
-                val dao = UsuarioDAO(this)
-                dao.insertar(nombre, correo)
+                    txtNombre.setText("")
+                    txtCorreo.setText("")
+                } else {
+
+                    txtResultado.text = "Solo administradores pueden registrarse ❌"
+
+                    txtNombre.setText("")
+                    txtCorreo.setText("")
+                }
+
             },
 
             { error ->

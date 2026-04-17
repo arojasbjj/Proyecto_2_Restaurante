@@ -27,6 +27,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <Button
+        android:id="@+id/btnIrRegistro"
+        android:text="Ir a Registro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
     <TextView
         android:id="@+id/txtResultado"
         android:layout_width="match_parent"

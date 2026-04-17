@@ -19,6 +19,8 @@ class LoginActivity : AppCompatActivity() {
     lateinit var txtResultado: TextView
     lateinit var btnIngresar: Button
 
+    lateinit var btnIrRegistro: Button
+
     lateinit var preferencias: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +36,12 @@ class LoginActivity : AppCompatActivity() {
 
         btnIngresar.setOnClickListener {
             loginUsuario()
+        }
+
+        btnIrRegistro = findViewById(R.id.btnIrRegistro)
+
+        btnIrRegistro.setOnClickListener {
+            irARegistro()
         }
     }
 
@@ -56,5 +64,9 @@ class LoginActivity : AppCompatActivity() {
         } else {
             txtResultado.text = "Credenciales inválidas (admin/admin)"
         }
+    }
+
+    private fun irARegistro() {
+        startActivity(Intent(this, RegistroActivity::class.java))
     }
 }
