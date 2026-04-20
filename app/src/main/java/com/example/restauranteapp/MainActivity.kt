@@ -12,6 +12,7 @@ class MainActivity : AppCompatActivity() {
 
         val bottomMenu = findViewById<BottomNavigationView>(R.id.bottomMenu)
 
+        // Fragment inicial
         supportFragmentManager.beginTransaction()
             .replace(R.id.frameContainer, InicioFragment())
             .commit()

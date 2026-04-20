@@ -7,10 +7,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import com.android.volley.Request
-import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.Volley
-import org.json.JSONObject
+import com.example.restauranteapp.database.UsuarioDAO
 
 class LoginActivity : AppCompatActivity() {
 
@@ -49,7 +46,9 @@ class LoginActivity : AppCompatActivity() {
         val usuario = txtCorreo.text.toString()
         val password = txtPassword.text.toString()
 
-        if (usuario == "admin" && password == "admin") {
+        val usuarioDAO = UsuarioDAO(this)
+        if (usuarioDAO.validarUsuario(usuario, password)) {
+            // GUARDAR SESIÓN
             val editor = preferencias.edit()
             editor.putString("usuario", usuario)
             editor.putBoolean("logueado", true)
@@ -57,6 +56,7 @@ class LoginActivity : AppCompatActivity() {
 
             txtResultado.text = "Acceso permitido"
 
+            // Ir a la pantalla principal
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         } else {

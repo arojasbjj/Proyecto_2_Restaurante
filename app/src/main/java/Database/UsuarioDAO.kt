@@ -4,9 +4,6 @@ import android.content.ContentValues
 import android.content.Context
 
 class UsuarioDAO(context: Context) {
-
-    private val dbHelper = DatabaseHelper(context)
-
     fun insertar(usuario: String, password: String, perfil: String) {
         val db = dbHelper.writableDatabase
         val values = ContentValues().apply {
@@ -18,11 +15,13 @@ class UsuarioDAO(context: Context) {
         db.close()
     }
 
-    fun validarAdmin(usuario: String, password: String): Boolean {
+    private val dbHelper = DatabaseHelper(context)
+
+    fun validarUsuario(usuario: String, password: String): Boolean {
         val db = dbHelper.readableDatabase
         val cursor = db.rawQuery(
-            "SELECT * FROM usuario WHERE usuario = ? AND password = ? AND perfil = ?",
-            arrayOf(usuario, password, "Administrador")
+            "SELECT * FROM usuario WHERE usuario = ? AND password = ?",
+            arrayOf(usuario, password)
         )
         val existe = cursor.count > 0
         cursor.close()

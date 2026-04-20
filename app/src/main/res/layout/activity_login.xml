@@ -27,7 +27,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <!-- Botón de registro eliminado para solo permitir acceso admin/admin -->
+    <Button
+        android:id="@+id/btnIrRegistro"
+        android:text="Ir a Registro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
     <TextView
         android:id="@+id/txtResultado"
