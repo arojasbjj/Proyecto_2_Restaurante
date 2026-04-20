@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">RestauranteApp</string>
+    <string name="acceso_permitido">Acceso permitido</string>
+    <string name="credenciales_invalidas">Credenciales inválidas (admin/admin)</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
