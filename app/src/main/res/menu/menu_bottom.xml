@@ -17,4 +17,9 @@
         android:title="Perfil"
         android:icon="@android:drawable/ic_menu_myplaces"/>
 
+    <item
+        android:id="@+id/menu_carrito"
+        android:title="Carrito"
+        android:icon="@android:drawable/ic_menu_add"/>
+
 </menu>

@@ -1,5 +1,6 @@
 package com.example.restauranteapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -37,6 +38,10 @@ class MainActivity : AppCompatActivity() {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.frameContainer, PerfilFragment())
                         .commit()
+                }
+
+                R.id.menu_carrito -> {
+                    startActivity(Intent(this, CarritoActivity::class.java))
                 }
             }
 

@@ -11,6 +11,7 @@ import com.android.volley.toolbox.Volley
 import org.json.JSONObject
 import com.example.restauranteapp.database.UsuarioDAO
 
+
 class RegistroActivity : AppCompatActivity() {
 
     lateinit var txtNombre: EditText
@@ -89,8 +90,12 @@ class RegistroActivity : AppCompatActivity() {
             { error ->
 
                 val status = error.networkResponse?.statusCode
-
-                txtResultado.text = "Error API: $status"
+                val mensaje = when {
+                    status != null -> "Error HTTP: $status"
+                    error.message != null -> "Sin conexión: ${error.message}"
+                    else -> "No se pudo conectar al servidor. Verifica que la API esté corriendo en $url"
+                }
+                txtResultado.text = mensaje
             }
 
         ) {
